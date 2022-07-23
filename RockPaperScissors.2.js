@@ -40,53 +40,53 @@ function computerTurn() {
 }
 
 function checkRoundWinner() {
-    switch (roundCount < 5) {
+    switch (playerSelection) {
         case playerSelection === r && computerSelection === s:
             roundCount++;
             playerScore++;
             console.log("You win. Rock beats Scissors.");
-            if (roundCount === 6) endGame();
+            if (compScore !== 5 && playerScore !== 5) endGame();
             break;
         
         case playerSelection === p && computerSelection === r:
             roundCount++;
             playerScore++;
             console.log("You win. Paper beats Rock.");
-            if (roundCount === 6) endGame();
+            if (compScore !== 5 && playerScore !== 5) endGame();
             break;
 
         case playerSelection === s && computerSelection === p:
             roundCount++;
             playerScore++;
             console.log("You win. Scissors beats Paper.");
-            if (roundCount === 6) endGame();
+            if (compScore !== 5 && playerScore !== 5) endGame();
             break;
 
         case playerSelection === r && computerSelection === p:
             roundCount++;
             compScore++;
             console.log("You lose. Paper beats Rock.");
-            if (roundCount === 6) endGame();
+            if (compScore !== 5 && playerScore !== 5) endGame();
             break;
 
         case playerSelection === p && computerSelection === s:
             roundCount++;
             compScore++;
             console.log("You lose. Scissors beats paper.");
-            if (roundCount === 6) endGame();
+            if (compScore !== 5 && playerScore !== 5) endGame();
             break;
 
         case playerSelection === s && computerSelection === r:
             roundCount++;
             compScore++;
             console.log("You lose. Rock beats Scissors.");
-            if (roundCount === 6) endGame();
+            if (compScore !== 5 && playerScore !== 5) endGame();
             break;
 
         default:
             roundCount++;
             console.log("Round draw.");
-            if (roundCount === 6) endGame();
+            if (compScore !== 5 && playerScore !== 5) endGame();
     }
 }
 
@@ -110,3 +110,22 @@ function endGame() {
     compScore = 0;
     roundCount = 1;
 }
+
+// UI buttons
+const body = document.querySelector('body');
+const btnRock = document.createElement('button');
+const btnPaper = document.createElement('buton');
+const btnScissors = document.createElement('button');
+let scoreBoard = document.createElement('div');
+
+btnRock.textContent = "Rock";
+btnPaper.textContent = "Paper";
+btnScissors.textContent = "Scissors";
+
+
+
+body.appendChild(btnRock);
+
+btnRock.addEventListener('click', function(e) {
+    console.log(e.id);
+});
