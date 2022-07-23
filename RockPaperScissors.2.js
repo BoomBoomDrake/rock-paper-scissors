@@ -1,6 +1,6 @@
-const r = "rock";
-const p = "paper";
-const s = "scissors";
+//const r = "rock";
+//const p = "paper";
+//const s = "scissors";
 
 let playerScore = 0;
 let compScore = 0;
@@ -14,8 +14,8 @@ function gameStart() {
         playRound();
     }
 }
-function playRound() {
-    let input = prompt("Rock, Paper, or Scissors?", "");
+function playRound(button) {
+    let input = button.textContent;
 
     playerSelection = input.toLowerCase();
     console.log(playerSelection); // confirm selection
@@ -28,65 +28,65 @@ function computerTurn() {
     let number = Math.ceil(Math.random() * 3);
 
     if (number === 1) {
-        computerSelection = r;
+        computerSelection = "rock";
         console.log(computerSelection) //confirm selection
     } else if (number === 2) {
-        computerSelection = p;
+        computerSelection = "paper";
         console.log(computerSelection);//""
     } else if (number === 3) {
-        computerSelection = s;
+        computerSelection = "scissors";
         console.log(computerSelection);//""
     }
 }
 
 function checkRoundWinner() {
-    switch (playerSelection) {
-        case playerSelection === r && computerSelection === s:
+    switch (compScore !== 5 && playerScore !== 0) {
+        case playerSelection === "rock" && computerSelection === "scissors":
             roundCount++;
             playerScore++;
             console.log("You win. Rock beats Scissors.");
-            if (compScore !== 5 && playerScore !== 5) endGame();
+            if (compScore === 5 || playerScore === 5) endGame();
             break;
         
-        case playerSelection === p && computerSelection === r:
+        case playerSelection === "paper" && computerSelection === "rock":
             roundCount++;
             playerScore++;
             console.log("You win. Paper beats Rock.");
-            if (compScore !== 5 && playerScore !== 5) endGame();
+            if (compScore === 5 || playerScore === 5) endGame();
             break;
 
-        case playerSelection === s && computerSelection === p:
+        case playerSelection === "scissors" && computerSelection === "paper":
             roundCount++;
             playerScore++;
             console.log("You win. Scissors beats Paper.");
-            if (compScore !== 5 && playerScore !== 5) endGame();
+            if (compScore === 5 || playerScore === 5) endGame();
             break;
 
-        case playerSelection === r && computerSelection === p:
+        case playerSelection === "rock" && computerSelection === "paper":
             roundCount++;
             compScore++;
             console.log("You lose. Paper beats Rock.");
-            if (compScore !== 5 && playerScore !== 5) endGame();
+            if (compScore === 5 || playerScore === 5) endGame();
             break;
 
-        case playerSelection === p && computerSelection === s:
+        case playerSelection === "paper" && computerSelection === "scissors":
             roundCount++;
             compScore++;
             console.log("You lose. Scissors beats paper.");
-            if (compScore !== 5 && playerScore !== 5) endGame();
+            if (compScore === 5 || playerScore === 5) endGame();
             break;
 
-        case playerSelection === s && computerSelection === r:
+        case playerSelection === "scissors" && computerSelection === "rock":
             roundCount++;
             compScore++;
             console.log("You lose. Rock beats Scissors.");
-            if (compScore !== 5 && playerScore !== 5) endGame();
+            if (compScore === 5 || playerScore === 5) endGame();
             break;
 
         default:
             roundCount++;
             console.log("Round draw.");
-            if (compScore !== 5 && playerScore !== 5) endGame();
+            if (compScore === 5 || playerScore === 5) endGame();
     }
 }
 
@@ -114,7 +114,7 @@ function endGame() {
 // UI buttons
 const body = document.querySelector('body');
 const btnRock = document.createElement('button');
-const btnPaper = document.createElement('buton');
+const btnPaper = document.createElement('button');
 const btnScissors = document.createElement('button');
 let scoreBoard = document.createElement('div');
 
@@ -122,10 +122,15 @@ btnRock.textContent = "Rock";
 btnPaper.textContent = "Paper";
 btnScissors.textContent = "Scissors";
 
-
-
+body.appendChild(scoreBoard);
 body.appendChild(btnRock);
+body.appendChild(btnPaper);
+body.appendChild(btnScissors);
 
-btnRock.addEventListener('click', function(e) {
-    console.log(e.id);
-});
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        //console.log(button.textContent);
+        playRound(button); 
+    })
+})
